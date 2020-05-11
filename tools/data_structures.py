@@ -2,7 +2,13 @@
 #   DATA STRUCTURES
 ############################################################
 
-from collections import deque
+from collections import defaultdict, deque
+
+############################################################
+#   DefaultDict
+############################################################
+
+DefaultDict = defaultdict
 
 ############################################################
 #   Queue

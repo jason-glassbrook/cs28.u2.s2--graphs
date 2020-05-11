@@ -4,7 +4,8 @@
 #   A simple implementation.
 ############################################################
 
-from tools.data_structures import Stack, Queue
+from tools.data_structures import DefaultDict, Stack, Queue
+from tools.iter_tools import is_iterable
 
 ############################################################
 #   Graph
@@ -18,7 +19,12 @@ class Graph:
 
     def __init__(self, nodes=None):
 
-        self.__map = {}
+        self.__map = DefaultDict(set)
+
+        if is_iterable(nodes):
+            for n in nodes:
+                self.__map[n]    # simply puts the node in map with no neighbors
+
         return
 
     @property
