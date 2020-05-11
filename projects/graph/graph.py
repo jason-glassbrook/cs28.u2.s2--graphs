@@ -34,7 +34,7 @@ class Graph:
 
     def add_node(self, node):
         """
-        Add a node with `node` to the graph.
+        Add a node with label `node` to the graph.
         """
 
         pass    # TODO
@@ -48,7 +48,7 @@ class Graph:
 
     def get_neighbors(self, node):
         """
-        Get all neighbors of the node with `node`.
+        Get all neighbors of the node with label `node`.
         """
 
         pass    # TODO
