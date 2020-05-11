@@ -2,17 +2,15 @@
 
 ## Objectives
 
-* Learn the difference between randomness and pseudorandomness
-* Learn how how to shuffle an array in O(n) time and space complexity
-
+*   Learn the difference between randomness and pseudo-randomness
+*   Learn how how to shuffle an array in O(n) time and space complexity
 
 ## What is randomness?
 
-What is Randomness? This seems like a simple question but randomness is actually one of the most commonly misunderstood concepts in math and computing. Here's a definition of randomness from [wikipedia](https://en.wikipedia.org/wiki/Randomness):
+What is Randomness? This seems like a simple question but randomness is actually one of the most commonly misunderstood concepts in math and computing. Here's a definition of randomness from [Wikipedia](https://en.wikipedia.org/wiki/Randomness):
 
-```
-Randomness is the lack of pattern or predictability in events. A random sequence of events, symbols or steps has no order and does not follow an intelligible pattern or combination.
-```
+> Randomness is the lack of pattern or predictability in events.
+> A random sequence of events, symbols or steps has no order and does not follow an intelligible pattern or combination.
 
 Coin flips are random: If you flip a coin 9 times and get 9 __heads__ in a row, the probability of hitting __heads__ a 10th time is still exactly 50%.
 
@@ -20,11 +18,11 @@ Rock-Paper-Scissors is NOT random when played with humans. It turns out, people 
 
 Try this exercise:
 
-```
+```text
 Write down 10 random numbers between 1-10.
 ```
 
-What were you thinking while choosing numbers? Did you have thoughts like, "I already picked 7 twice so I shouldn't pick 7 again," or, "I need a 5 since there hasn't been one yet." Everytime you use rationale like this, you add personal bias, making your choices more predictable and less random.
+What were you thinking while choosing numbers? Did you have thoughts like, "I already picked 7 twice so I shouldn't pick 7 again," or, "I need a 5 since there hasn't been one yet." Every time you use rationale like this, you add personal bias, making your choices more predictable and less random.
 
 Computers are pretty good at this sort of randomness. Here's a Python list comprehension that runs this exercise 10 times in a row:
 
@@ -108,7 +106,7 @@ Statistically, you would expect each number to show up exactly 10% of the time. 
 
 Computers are quite good at producing statistical randomness like this. But is it __actually__ random? Turns out, the answer is no.
 
-## What is pseudorandomness?
+## What is pseudo-randomness?
 
 Computers are machines that take some input, run a set of operations on that input, then return an output. These operations are generally **deterministic**, which means it will always produce the same output from an identical set of inputs.
 
@@ -164,16 +162,15 @@ Nothing out of the ordinary. Now, let's reset the seed and try again:
 
 As you can see, we get the exact same values! This is useful if you want to get a predictable chain of "random" numbers, like if you wanted to recreate a particular [Minecraft map](https://www.pcgamesn.com/minecraft/30-best-minecraft-seeds). With pseudorandom number generators, an entire world can be contained in one simple integer.
 
-
 # Shuffling an Array
 
 Now that we know how computers generate random numbers, let's try shuffling an array. We can do this quite efficiently using an algorithm called the [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle).
 
 Here's the basic algorithm:
 
-1. Begin with a list of N elements
-2. Swap the first element with the i-th element, where i is a random position.
-3. Repeat this for each element, in order, until you reach the end of the list.
+1.  Begin with a list of N elements
+2.  Swap the first element with the `i`th element, where `i` is a random position.
+3.  Repeat this for each element, in order, until you reach the end of the list.
 
 Let's try implementing the Fisher-Yates using the Python function, `random.randint(a, b)` which returns a random integer between a and b (including a and b). We'll start with a sorted list of N elements, where N=5.
 
