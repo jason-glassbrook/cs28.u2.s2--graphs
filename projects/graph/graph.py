@@ -32,6 +32,18 @@ class Graph:
 
         return dict(self.__map)    # We don't want users to directly edit this.
 
+    @property
+    def nodes(self):
+
+        return set(self.__map.keys())
+
+    @property
+    def edges(self):
+
+        return set((from_node, to_node)
+                   for from_node in self.__map
+                   for to_node in self.__map[from_node])
+
     def add_node(self, node):
         """
         Add a node with label `node` to the graph.
