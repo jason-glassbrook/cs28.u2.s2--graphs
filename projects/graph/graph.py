@@ -23,35 +23,41 @@ class Graph:
 
         if is_iterable(nodes):
             for n in nodes:
-                self.__map[n]    # simply puts the node in map with no neighbors
+                self.add_node(n)
 
         return
 
     @property
     def map(self):
 
-        return dict(self.__map)
+        return dict(self.__map)    # We don't want users to directly edit this.
 
     def add_node(self, node):
         """
         Add a node with label `node` to the graph.
         """
 
-        pass    # TODO
+        # Simply add the node in map with no neighbors.
+        # If it already exists, there is no change.
+        self.__map[node]
+
+        return
 
     def add_edge(self, from_node, to_node):
         """
         Add a directed edge `(from_node, to_node)` to the graph.
         """
 
-        pass    # TODO
+        self.__map[from_node].add(to_node)
+
+        return
 
     def get_neighbors(self, node):
         """
         Get all neighbors of the node with label `node`.
         """
 
-        pass    # TODO
+        return set(self.__map[node])    # We don't want users to directly edit this.
 
     def bft(self, from_node):
         """
