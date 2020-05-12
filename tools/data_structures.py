@@ -2,13 +2,11 @@
 #   DATA STRUCTURES
 ############################################################
 
-from collections import defaultdict, deque
-
-############################################################
-#   DefaultDict
-############################################################
-
-DefaultDict = defaultdict
+from collections import (
+    namedtuple as NamedTuple,
+    defaultdict as DefaultDict,
+    deque as Deck,
+)
 
 ############################################################
 #   Queue
@@ -19,7 +17,7 @@ class Queue:
 
     def __init__(self):
 
-        self.__container = deque()
+        self.__container = Deck()
         return
 
     def __len__(self):
@@ -49,7 +47,7 @@ class Stack:
 
     def __init__(self):
 
-        self.__container = deque()
+        self.__container = Deck()
         return
 
     def __len__(self):
