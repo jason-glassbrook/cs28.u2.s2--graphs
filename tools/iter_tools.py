@@ -2,7 +2,10 @@
 
 import typing as ty
 from itertools import chain
+from copy import copy
 
+############################################################
+#   Type Checking
 ############################################################
 
 
@@ -10,6 +13,8 @@ def is_iterable(thing) -> bool:
     return isinstance(thing, ty.Iterable)
 
 
+############################################################
+#   Joining
 ############################################################
 
 
@@ -37,6 +42,8 @@ def join_as_set(*iters: ty.Iterable[ty.Iterable]) -> set:
 
 
 ############################################################
+#   Keys
+############################################################
 
 
 def keys_as(
@@ -60,3 +67,46 @@ def keys_as_tuple(mapping: ty.Mapping) -> tuple:
 def keys_as_set(mapping: ty.Mapping) -> set:
 
     return keys_as(set, mapping)
+
+
+############################################################
+#   Building Collections
+############################################################
+
+
+def inherit(
+    family: ty.Mapping,
+    member_key: ty.Any,
+    overlay: ty.Optional[ty.Mapping] = None,
+    underlay: ty.Optional[ty.Mapping] = None,
+    extends_key: str = "extends",
+    delete_extends_key: bool = False,
+) -> ty.Dict:
+
+    overlay = copy(overlay) if overlay is not None else dict()
+    filling = dict()
+    underlay = copy(underlay) if underlay is not None else dict()
+
+    while member_key is not None and member_key in family:
+
+        member = family[member_key]
+        member_extends = member[extends_key] if extends_key in member else None
+
+        filling = {
+            **copy(member),
+            **filling,
+            "extends": member_extends,
+        }
+
+        member_key = member_extends
+
+    if delete_extends_key and extends_key in filling:
+        del filling[extends_key]
+
+    result = {
+        **underlay,
+        **filling,
+        **overlay,
+    }
+
+    return result
