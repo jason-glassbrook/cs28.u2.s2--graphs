@@ -6,6 +6,7 @@
 
 from tools.data_structures import DefaultDict, Stack, Queue
 from tools.iter_tools import is_iterable
+from tools.debug_tools import debug_print
 
 ############################################################
 #   Graph
@@ -17,7 +18,11 @@ class Graph:
     Represent a graph as a mapping of node labels to edges.
     """
 
-    def __init__(self, nodes=None):
+    DEFAULT_DEBUG = False
+
+    def __init__(self, nodes=None, debug=DEFAULT_DEBUG):
+
+        debug_print("Graph.__init__", (nodes), should_print=debug)
 
         self.__map = DefaultDict(set)
 
@@ -44,10 +49,12 @@ class Graph:
                    for from_node in self.__map
                    for to_node in self.__map[from_node])
 
-    def add_node(self, node):
+    def add_node(self, node, debug=DEFAULT_DEBUG):
         """
         Add a node with label `node` to the graph.
         """
+
+        debug_print("Graph.add_node", (node), should_print=debug)
 
         # Simply add the node in map with no neighbors.
         # If it already exists, there is no change.
@@ -55,67 +62,83 @@ class Graph:
 
         return
 
-    def add_edge(self, from_node, to_node):
+    def add_edge(self, from_node, to_node, debug=DEFAULT_DEBUG):
         """
         Add a directed edge `(from_node, to_node)` to the graph.
         """
+
+        debug_print("Graph.add_edge", (from_node, to_node), should_print=debug)
 
         self.__map[from_node].add(to_node)
 
         return
 
-    def get_neighbors(self, node):
+    def get_neighbors(self, node, debug=DEFAULT_DEBUG):
         """
         Get all neighbors of the node with label `node`.
         """
 
+        debug_print("Graph.get_neighbors", (node), should_print=debug)
+
         return set(self.__map[node])    # We don't want users to directly edit this.
 
-    def bft(self, from_node):
+    def bft(self, from_node, debug=DEFAULT_DEBUG):
         """
         Print each node in breadth-first order beginning from `from_node`.
         """
 
-        pass    # TODO
+        debug_print("Graph.bft", (from_node), should_print=debug)
 
-    def dft(self, from_node):
+        return
+
+    def dft(self, from_node, debug=DEFAULT_DEBUG):
         """
         Print each node in depth-first order beginning from `from_node`.
         """
 
-        pass    # TODO
+        debug_print("Graph.dft", (from_node), should_print=debug)
 
-    def dft_recursive(self, from_node):
+        return
+
+    def dft_recursive(self, from_node, debug=DEFAULT_DEBUG):
         """
         Print each node in depth-first order beginning from `from_node`.
 
         This should be done using recursion.
         """
 
-        pass    # TODO
+        debug_print("Graph.dft_recursive", (from_node), should_print=debug)
 
-    def bfs(self, from_node, to_node):
+        return
+
+    def bfs(self, from_node, to_node, debug=DEFAULT_DEBUG):
         """
         Return a list containing the shortest path from `from_node` to `to_node` in breath-first order.
         """
 
-        pass    # TODO
+        debug_print("Graph.bfs", (from_node, to_node), should_print=debug)
 
-    def dfs(self, from_node, to_node):
+        return
+
+    def dfs(self, from_node, to_node, debug=DEFAULT_DEBUG):
         """
         Return a list containing a path from `from_node` to `to_node` in depth-first order.
         """
 
-        pass    # TODO
+        debug_print("Graph.dfs", (from_node, to_node), should_print=debug)
 
-    def dfs_recursive(self, from_node, to_node):
+        return
+
+    def dfs_recursive(self, from_node, to_node, debug=DEFAULT_DEBUG):
         """
         Return a list containing a path from `from_node` to `to_node` in depth-first order.
 
         This should be done using recursion.
         """
 
-        pass    # TODO
+        debug_print("Graph.dfs_recursive", (from_node, to_node), should_print=debug)
+
+        return
 
 
 if __name__ == "__main__":
