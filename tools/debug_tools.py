@@ -217,9 +217,9 @@ def parse_options__messages(
 
 def debug_str(
     name: ty__name,
-    args: ty__args,
-    kwargs: ty__kwargs,
-    messages: ty__messages,
+    args: ty.Optional[ty__args] = None,
+    kwargs: ty.Optional[ty__kwargs] = None,
+    messages: ty.Optional[ty__messages] = None,
     **options,
 ) -> str:
 
@@ -234,8 +234,8 @@ def debug_str(
 
 def debug_str__call_sign(
     name: ty__name,
-    args: ty__args,
-    kwargs: ty__kwargs,
+    args: ty.Optional[ty__args] = None,
+    kwargs: ty.Optional[ty__kwargs] = None,
     **options,
 ) -> str:
 
@@ -253,7 +253,7 @@ def debug_str__call_sign(
 
 
 def debug_str__call_sign__name(
-    name: ty__name,
+    name: ty.Optional[ty__name] = None,
     **options,
 ) -> str:
 
@@ -270,23 +270,37 @@ def debug_str__call_sign__name(
 
 
 def debug_str__call_sign__args(
-    args: ty__args,
-    kwargs: ty__kwargs,
+    args: ty.Optional[ty__args] = None,
+    kwargs: ty.Optional[ty__kwargs] = None,
     **options,
 ) -> str:
 
     o = parse_options__call_sign__args(**options)
 
-    return "".join((
-        o["before"],
-        iter_to_str(
+    args_str = None
+
+    if args is None and kwargs is None:
+        args_str = ""
+
+    elif args is not None and kwargs is None:
+        args_str = debug_str__args(args, **options)
+
+    elif args is None and kwargs is not None:
+        args_str = debug_str__kwargs(kwargs, **options)
+
+    else:
+        args_str = iter_to_str(
             (
                 debug_str__args(args, **options),
                 debug_str__kwargs(kwargs, **options),
             ),
             style="plain",
             **parse_options__args(**options),
-        ),
+        )
+
+    return "".join((
+        o["before"],
+        args_str,
         o["after"],
     ))
 
@@ -295,45 +309,57 @@ def debug_str__call_sign__args(
 
 
 def debug_str__args(
-    args: ty__args,
+    args: ty.Optional[ty__args] = None,
     **options,
 ) -> str:
 
-    return iter_to_str(
-        args,
-        style="args",
-        **parse_options__args(**options),
-    )
+    if args is None:
+        return ""
+
+    else:
+        return iter_to_str(
+            args,
+            style="args",
+            **parse_options__args(**options),
+        )
 
 
 #-----------------------------------------------------------
 
 
 def debug_str__kwargs(
-    kwargs: ty__kwargs,
+    kwargs: ty.Optional[ty__kwargs] = None,
     **options,
 ) -> str:
 
-    return iter_to_str(
-        kwargs,
-        style="kwargs",
-        **parse_options__kwargs(**options),
-    )
+    if kwargs is None:
+        return ""
+
+    else:
+        return iter_to_str(
+            kwargs,
+            style="kwargs",
+            **parse_options__kwargs(**options),
+        )
 
 
 #-----------------------------------------------------------
 
 
 def debug_str__messages(
-    messages: ty__messages,
+    messages: ty.Optional[ty__messages] = None,
     **options,
 ) -> str:
 
-    return iter_to_str(
-        messages,
-        style="plain",
-        **parse_options__messages(**options),
-    )
+    if messages is None:
+        return ""
+
+    else:
+        return iter_to_str(
+            messages,
+            style="plain",
+            **parse_options__messages(**options),
+        )
 
 
 ############################################################
@@ -345,9 +371,9 @@ DEFAULT__SHOULD_PRINT = True
 
 def debug_print(
     name: ty__name,
-    args: ty__args,
-    kwargs: ty__kwargs,
-    messages: ty__messages,
+    args: ty.Optional[ty__args] = None,
+    kwargs: ty.Optional[ty__kwargs] = None,
+    messages: ty.Optional[ty__messages] = None,
     should_print: bool = DEFAULT__SHOULD_PRINT,
     **options,
 ):
@@ -363,8 +389,8 @@ def debug_print(
 
 def debug_print__call_sign(
     name: ty__name,
-    args: ty__args,
-    kwargs: ty__kwargs,
+    args: ty.Optional[ty__args] = None,
+    kwargs: ty.Optional[ty__kwargs] = None,
     should_print: bool = DEFAULT__SHOULD_PRINT,
     **options,
 ):
@@ -394,8 +420,8 @@ def debug_print__call_sign__name(
 
 
 def debug_print__call_sign__args(
-    args: ty__args,
-    kwargs: ty__kwargs,
+    args: ty.Optional[ty__args] = None,
+    kwargs: ty.Optional[ty__kwargs] = None,
     should_print: bool = DEFAULT__SHOULD_PRINT,
     **options,
 ):
@@ -410,7 +436,7 @@ def debug_print__call_sign__args(
 
 
 def debug_print__args(
-    args: ty__args,
+    args: ty.Optional[ty__args] = None,
     should_print: bool = DEFAULT__SHOULD_PRINT,
     **options,
 ):
@@ -425,7 +451,7 @@ def debug_print__args(
 
 
 def debug_print__kwargs(
-    kwargs: ty__kwargs,
+    kwargs: ty.Optional[ty__kwargs] = None,
     should_print: bool = DEFAULT__SHOULD_PRINT,
     **options,
 ):
@@ -440,7 +466,7 @@ def debug_print__kwargs(
 
 
 def debug_print__messages(
-    messages: ty__messages,
+    messages: ty.Optional[ty__messages] = None,
     should_print: bool = DEFAULT__SHOULD_PRINT,
     **options,
 ):
