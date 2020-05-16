@@ -9,13 +9,13 @@ class Test(unittest.TestCase):
     def setUp(self):
         self.graph = Graph()
 
-        self.graph.add_vertex(1)
-        self.graph.add_vertex(2)
-        self.graph.add_vertex(3)
-        self.graph.add_vertex(4)
-        self.graph.add_vertex(5)
-        self.graph.add_vertex(6)
-        self.graph.add_vertex(7)
+        self.graph.add_node(1)
+        self.graph.add_node(2)
+        self.graph.add_node(3)
+        self.graph.add_node(4)
+        self.graph.add_node(5)
+        self.graph.add_node(6)
+        self.graph.add_node(7)
 
         self.graph.add_edge(5, 3)
         self.graph.add_edge(6, 3)
@@ -28,9 +28,17 @@ class Test(unittest.TestCase):
         self.graph.add_edge(2, 3)
         self.graph.add_edge(4, 6)
 
-    def test_vertices(self):
-        vertices = {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
-        self.assertDictEqual(self.graph.map, vertices)
+    def test_nodes(self):
+        nodes = {
+            1: {2},
+            2: {3, 4},
+            3: {5},
+            4: {6, 7},
+            5: {3},
+            6: {3},
+            7: {1, 6},
+        }
+        self.assertDictEqual(self.graph.get_map(), nodes)
 
     def test_bft(self):
         bft = [
