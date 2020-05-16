@@ -32,18 +32,15 @@ class Graph:
 
         return
 
-    @property
-    def map(self):
+    def get_map(self):
 
         return dict(self.__map)    # We don't want users to directly edit this.
 
-    @property
-    def nodes(self):
+    def get_nodes(self):
 
         return set(self.__map.keys())
 
-    @property
-    def edges(self):
+    def get_edges(self):
 
         return set((from_node, to_node)
                    for from_node in self.__map
