@@ -117,6 +117,48 @@ class Graph:
 
         return set(self.__map[node])    # We don't want users to directly edit this.
 
+    def xft(self, PusherPopper, from_node, debug=DEFAULT__DEBUG):
+        """
+        Print each node in customizable order beginning from `from_node`.
+        """
+
+        ON_VISIT = print
+
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).xft", args=(from_node,), kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
+
+        nodes_to_visit = PusherPopper()
+        visited_nodes = set()
+
+        nodes_to_visit.push(from_node)
+
+        local_debug_print(f"pushed: {from_node}")
+
+        while len(nodes_to_visit) > 0:
+
+            popped_node = nodes_to_visit.pop()
+            local_debug_print(f"popped: {popped_node}")
+
+            if popped_node not in visited_nodes:
+
+                visited_nodes.add(popped_node)
+                ON_VISIT(popped_node)
+                local_debug_print(f"visited: {popped_node}")
+
+                for node in self.get_neighbors(popped_node):
+
+                    nodes_to_visit.push(node)
+                    local_debug_print(f"pushed: {node}")
+
+            else:
+
+                local_debug_print(f"already visited: {popped_node}")
+
+        return
+
     def bft(self, from_node, debug=DEFAULT__DEBUG):
         """
         Print each node in breadth-first order beginning from `from_node`.
