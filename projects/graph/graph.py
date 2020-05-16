@@ -187,7 +187,9 @@ class Graph:
 
         return self.xft(Stack, from_node, debug=debug)
 
-    def dft_recursive(self, from_node, visited_nodes=None, debug=DEFAULT__DEBUG):
+    def dft_recursive(
+        self, from_node, visited_nodes=None, visited_path=None, debug=DEFAULT__DEBUG
+    ):
         """
         Print each node in depth-first order beginning from `from_node`.
 
@@ -197,7 +199,7 @@ class Graph:
         ON_VISIT = print
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).dft_recursive", args=(from_node, visited_nodes), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).dft_recursive", args=(from_node, visited_nodes, visited_path), kwargs=None, messages=messages, should_print=debug,); return
         # yapf: enable
 
         local_debug_print()
@@ -205,21 +207,23 @@ class Graph:
         if visited_nodes is None:
             visited_nodes = set()
 
+        if visited_path is None:
+            visited_path = list()
+
         ON_VISIT(from_node)
         visited_nodes.add(from_node)
-        visited_path = [from_node]
+        visited_path = visited_path + [from_node]
         local_debug_print(f"visited: {from_node}")
 
         for neighbor in self.get_neighbors(from_node):
 
             if neighbor not in visited_nodes:
 
-                visited_path.extend(
-                    self.dft_recursive(
-                        neighbor,
-                        visited_nodes,
-                        debug=debug,
-                    )
+                visited_path = self.dft_recursive(
+                    neighbor,
+                    visited_nodes,
+                    visited_path,
+                    debug=debug,
                 )
 
         return visited_path
