@@ -170,6 +170,8 @@ class Graph:
 
         local_debug_print()
 
+        self.xft(Queue, from_node, debug=debug)
+
         return
 
     def dft(self, from_node, debug=DEFAULT__DEBUG):
@@ -183,6 +185,7 @@ class Graph:
 
         local_debug_print()
 
+        self.xft(Stack, from_node, debug=debug)
 
         return
 
