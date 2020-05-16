@@ -18,11 +18,19 @@ class Graph:
     Represent a graph as a mapping of node labels to edges.
     """
 
-    DEFAULT_DEBUG = False
+    DEFAULT__DEBUG = False
 
-    def __init__(self, nodes=None, debug=DEFAULT_DEBUG):
+    # DEFAULT__ON_PUSH = None
+    # DEFAULT__ON_POP = None
+    # DEFAULT__ON_VISIT = None
 
-        debug_print("Graph.__init__", (nodes), should_print=debug)
+    def __init__(self, nodes=None, debug=DEFAULT__DEBUG):
+
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("Graph.__init__", args=(nodes,), kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         self.__map = DefaultDict(set)
 
@@ -32,26 +40,48 @@ class Graph:
 
         return
 
-    def get_map(self):
+    def get_map(self, debug=DEFAULT__DEBUG):
+
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).get_map", args=None, kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         return dict(self.__map)    # We don't want users to directly edit this.
 
-    def get_nodes(self):
+    def get_nodes(self, debug=DEFAULT__DEBUG):
+
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).get_nodes", args=None, kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         return set(self.__map.keys())
 
-    def get_edges(self):
+    def get_edges(self, debug=DEFAULT__DEBUG):
+
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).get_edges", args=None, kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         return set((from_node, to_node)
                    for from_node in self.__map
                    for to_node in self.__map[from_node])
 
-    def add_node(self, node, debug=DEFAULT_DEBUG):
+    def add_node(self, node, debug=DEFAULT__DEBUG):
         """
         Add a node with label `node` to the graph.
         """
 
-        debug_print("Graph.add_node", (node), should_print=debug)
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).add_node", args=(node,), kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         # Simply add the node in map with no neighbors.
         # If it already exists, there is no change.
@@ -59,81 +89,114 @@ class Graph:
 
         return
 
-    def add_edge(self, from_node, to_node, debug=DEFAULT_DEBUG):
+    def add_edge(self, from_node, to_node, debug=DEFAULT__DEBUG):
         """
         Add a directed edge `(from_node, to_node)` to the graph.
         """
 
-        debug_print("Graph.add_edge", (from_node, to_node), should_print=debug)
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).add_edge", args=(from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         self.__map[from_node].add(to_node)
 
         return
 
-    def get_neighbors(self, node, debug=DEFAULT_DEBUG):
+    def get_neighbors(self, node, debug=DEFAULT__DEBUG):
         """
         Get all neighbors of the node with label `node`.
         """
 
-        debug_print("Graph.get_neighbors", (node), should_print=debug)
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).get_neighbors", args=(node,), kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         return set(self.__map[node])    # We don't want users to directly edit this.
 
-    def bft(self, from_node, debug=DEFAULT_DEBUG):
+    def bft(self, from_node, debug=DEFAULT__DEBUG):
         """
         Print each node in breadth-first order beginning from `from_node`.
         """
 
-        debug_print("Graph.bft", (from_node), should_print=debug)
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).bft", args=(from_node,), kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         return
 
-    def dft(self, from_node, debug=DEFAULT_DEBUG):
+    def dft(self, from_node, debug=DEFAULT__DEBUG):
         """
         Print each node in depth-first order beginning from `from_node`.
         """
 
-        debug_print("Graph.dft", (from_node), should_print=debug)
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).dft", args=(from_node,), kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
+
 
         return
 
-    def dft_recursive(self, from_node, debug=DEFAULT_DEBUG):
+    def dft_recursive(self, from_node, debug=DEFAULT__DEBUG):
         """
         Print each node in depth-first order beginning from `from_node`.
 
         This should be done using recursion.
         """
 
-        debug_print("Graph.dft_recursive", (from_node), should_print=debug)
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).dft_recursive", args=(from_node,), kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         return
 
-    def bfs(self, from_node, to_node, debug=DEFAULT_DEBUG):
+    def bfs(self, from_node, to_node, debug=DEFAULT__DEBUG):
         """
         Return a list containing the shortest path from `from_node` to `to_node` in breath-first order.
         """
 
-        debug_print("Graph.bfs", (from_node, to_node), should_print=debug)
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).bfs", args=(from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         return
 
-    def dfs(self, from_node, to_node, debug=DEFAULT_DEBUG):
+    def dfs(self, from_node, to_node, debug=DEFAULT__DEBUG):
         """
         Return a list containing a path from `from_node` to `to_node` in depth-first order.
         """
 
-        debug_print("Graph.dfs", (from_node, to_node), should_print=debug)
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).dfs", args=(from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         return
 
-    def dfs_recursive(self, from_node, to_node, debug=DEFAULT_DEBUG):
+    def dfs_recursive(self, from_node, to_node, debug=DEFAULT__DEBUG):
         """
         Return a list containing a path from `from_node` to `to_node` in depth-first order.
 
         This should be done using recursion.
         """
 
-        debug_print("Graph.dfs_recursive", (from_node, to_node), should_print=debug)
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).dfs_recursive", args=(from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return
+        # yapf: enable
+
+        local_debug_print()
 
         return
 
