@@ -125,7 +125,7 @@ class Graph:
         ON_VISIT = print
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).xft", args=(from_node,), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).xft", args=(PusherPopper, from_node,), kwargs=None, messages=messages, should_print=debug,); return
         # yapf: enable
 
         local_debug_print()
@@ -269,7 +269,7 @@ if __name__ == "__main__":
     graph.add_edge(2, 3)
     graph.add_edge(4, 6)
 
-    print(graph.vertices)
+    print(graph.get_map())
     """
     Should print:
         {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
