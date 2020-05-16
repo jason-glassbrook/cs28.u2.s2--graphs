@@ -132,6 +132,7 @@ class Graph:
 
         nodes_to_visit = PusherPopper()
         visited_nodes = set()
+        visited_path = list()
 
         nodes_to_visit.push(from_node)
 
@@ -146,6 +147,7 @@ class Graph:
 
                 ON_VISIT(node)
                 visited_nodes.add(node)
+                visited_path.append(node)
                 local_debug_print(f"visited: {node}")
 
                 for neighbor in self.get_neighbors(node):
@@ -157,7 +159,7 @@ class Graph:
 
                 local_debug_print(f"already visited: {node}")
 
-        return
+        return visited_path
 
     def bft(self, from_node, debug=DEFAULT__DEBUG):
         """
@@ -170,9 +172,7 @@ class Graph:
 
         local_debug_print()
 
-        self.xft(Queue, from_node, debug=debug)
-
-        return
+        return self.xft(Queue, from_node, debug=debug)
 
     def dft(self, from_node, debug=DEFAULT__DEBUG):
         """
@@ -185,9 +185,7 @@ class Graph:
 
         local_debug_print()
 
-        self.xft(Stack, from_node, debug=debug)
-
-        return
+        return self.xft(Stack, from_node, debug=debug)
 
     def dft_recursive(self, from_node, debug=DEFAULT__DEBUG):
         """
@@ -275,7 +273,7 @@ if __name__ == "__main__":
         {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
     """
 
-    graph.bft(1, debug=True)
+    print(graph.bft(1))
     """
     Valid BFT paths:
         1, 2, 3, 4, 5, 6, 7
@@ -292,8 +290,8 @@ if __name__ == "__main__":
         1, 2, 4, 3, 7, 5, 6
     """
 
-    graph.dft(1, debug=True)
-    graph.dft_recursive(1, debug=True)
+    print(graph.dft(1))
+    print(graph.dft_recursive(1))
     """
     Valid DFT paths:
         1, 2, 3, 5, 4, 6, 7
@@ -302,14 +300,14 @@ if __name__ == "__main__":
         1, 2, 4, 6, 3, 5, 7
     """
 
-    print(graph.bfs(1, 6, debug=True))
+    print(graph.bfs(1, 6))
     """
     Valid BFS path:
         [1, 2, 4, 6]
     """
 
-    print(graph.dfs(1, 6, debug=True))
-    print(graph.dfs_recursive(1, 6, debug=True))
+    print(graph.dfs(1, 6))
+    print(graph.dfs_recursive(1, 6))
     """
     Valid DFS paths:
         [1, 2, 4, 6]
