@@ -250,20 +250,71 @@ class Graph:
 
         return
 
-    def dfs_recursive(self, from_node, to_node, debug=DEFAULT__DEBUG):
+    def dfs_recursive(
+        self,
+        from_node,
+        to_node,
+        visited_nodes=None,
+        visited_path=None,
+        debug=DEFAULT__DEBUG
+    ):
         """
         Return a list containing a path from `from_node` to `to_node` in depth-first order.
 
         This should be done using recursion.
         """
 
+        ON_VISIT = print
+
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).dfs_recursive", args=(from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).dfs_recursive", args=(from_node, to_node, visited_nodes, visited_path), kwargs=None, messages=messages, should_print=debug,); return
         # yapf: enable
 
         local_debug_print()
 
-        return
+        if visited_nodes is None:
+            visited_nodes = set()
+
+        if visited_path is None:
+            visited_path = list()
+
+        ON_VISIT(from_node)
+        visited_nodes.add(from_node)
+        visited_path = visited_path + [from_node]
+        local_debug_print(f"visited: {from_node}")
+
+        if from_node == to_node:
+
+            local_debug_print(f"found: {to_node}")
+            return visited_path
+
+        else:
+
+            for neighbor in self.get_neighbors(from_node):
+
+                if neighbor not in visited_nodes:
+
+                    neighbor_path = self.dfs_recursive(
+                        neighbor,
+                        to_node,
+                        visited_nodes,
+                        visited_path,
+                        debug=debug,
+                    )
+
+                    if neighbor_path is not None:
+
+                        local_debug_print(
+                            f"using neighbor's path: {neighbor}, {neighbor_path}"
+                        )
+                        return neighbor_path
+
+                    else:
+
+                        local_debug_print(f"not using neighbor's path: {neighbor}")
+
+        local_debug_print(f"not found from: {from_node}")
+        return None
 
 
 if __name__ == "__main__":
