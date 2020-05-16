@@ -139,23 +139,23 @@ class Graph:
 
         while len(nodes_to_visit) > 0:
 
-            popped_node = nodes_to_visit.pop()
-            local_debug_print(f"popped: {popped_node}")
+            node = nodes_to_visit.pop()
+            local_debug_print(f"popped: {node}")
 
-            if popped_node not in visited_nodes:
+            if node not in visited_nodes:
 
-                visited_nodes.add(popped_node)
-                ON_VISIT(popped_node)
-                local_debug_print(f"visited: {popped_node}")
+                ON_VISIT(node)
+                visited_nodes.add(node)
+                local_debug_print(f"visited: {node}")
 
-                for node in self.get_neighbors(popped_node):
+                for neighbor in self.get_neighbors(node):
 
-                    nodes_to_visit.push(node)
-                    local_debug_print(f"pushed: {node}")
+                    nodes_to_visit.push(neighbor)
+                    local_debug_print(f"pushed: {neighbor}")
 
             else:
 
-                local_debug_print(f"already visited: {popped_node}")
+                local_debug_print(f"already visited: {node}")
 
         return
 
@@ -275,7 +275,7 @@ if __name__ == "__main__":
         {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
     """
 
-    graph.bft(1)
+    graph.bft(1, debug=True)
     """
     Valid BFT paths:
         1, 2, 3, 4, 5, 6, 7
@@ -292,8 +292,8 @@ if __name__ == "__main__":
         1, 2, 4, 3, 7, 5, 6
     """
 
-    graph.dft(1)
-    graph.dft_recursive(1)
+    graph.dft(1, debug=True)
+    graph.dft_recursive(1, debug=True)
     """
     Valid DFT paths:
         1, 2, 3, 5, 4, 6, 7
@@ -302,14 +302,14 @@ if __name__ == "__main__":
         1, 2, 4, 6, 3, 5, 7
     """
 
-    print(graph.bfs(1, 6))
+    print(graph.bfs(1, 6, debug=True))
     """
     Valid BFS path:
         [1, 2, 4, 6]
     """
 
-    print(graph.dfs(1, 6))
-    print(graph.dfs_recursive(1, 6))
+    print(graph.dfs(1, 6, debug=True))
+    print(graph.dfs_recursive(1, 6, debug=True))
     """
     Valid DFS paths:
         [1, 2, 4, 6]
