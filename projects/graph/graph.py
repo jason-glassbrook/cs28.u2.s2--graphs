@@ -13,11 +13,8 @@ from tools.debug_tools import debug_print
 
 def maybe_call(fun, args=None, kwargs=None):
 
-    if args is None:
-        args = list()
-
-    if kwargs is None:
-        kwargs = dict()
+    args = args or list()
+    kwargs = kwargs or dict()
 
     if callable(fun):
         return fun(*args, **kwargs)
@@ -238,11 +235,8 @@ class Graph:
 
         local_debug_print()
 
-        if visited_nodes is None:
-            visited_nodes = set()
-
-        if visited_path is None:
-            visited_path = list()
+        visited_nodes = visited_nodes or set()
+        visited_path = visited_path or list()
 
         maybe_call(on_visit, [from_node])
         visited_nodes.add(from_node)
@@ -321,11 +315,8 @@ class Graph:
 
         local_debug_print()
 
-        if visited_nodes is None:
-            visited_nodes = set()
-
-        if visited_path is None:
-            visited_path = list()
+        visited_nodes = visited_nodes or set()
+        visited_path = visited_path or list()
 
         maybe_call(on_visit, [from_node])
         visited_nodes.add(from_node)
