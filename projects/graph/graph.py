@@ -9,6 +9,23 @@ from tools.iter_tools import is_iterable
 from tools.debug_tools import debug_print
 
 ############################################################
+
+
+def maybe_call(fun, args=None, kwargs=None):
+
+    if args is None:
+        args = list()
+
+    if kwargs is None:
+        kwargs = dict()
+
+    if callable(fun):
+        return fun(*args, **kwargs)
+
+    return
+
+
+############################################################
 #   Graph
 ############################################################
 
@@ -22,7 +39,7 @@ class Graph:
 
     # DEFAULT__ON_PUSH = None
     # DEFAULT__ON_POP = None
-    # DEFAULT__ON_VISIT = None
+    DEFAULT__ON_VISIT = print
 
     def __init__(self, nodes=None, debug=DEFAULT__DEBUG):
 
@@ -117,12 +134,16 @@ class Graph:
 
         return set(self.__map[node])    # We don't want users to directly edit this.
 
-    def xft(self, PusherPopper, from_node, debug=DEFAULT__DEBUG):
+    def xft(
+        self,
+        PusherPopper,
+        from_node,
+        on_visit=DEFAULT__ON_VISIT,
+        debug=DEFAULT__DEBUG,
+    ):
         """
         Print each node in customizable order beginning from `from_node`.
         """
-
-        ON_VISIT = print
 
         # yapf: disable
         def local_debug_print(*messages): debug_print("(Graph).xft", args=(PusherPopper, from_node,), kwargs=None, messages=messages, should_print=debug,); return # noqa
@@ -145,7 +166,7 @@ class Graph:
 
             if node not in visited_nodes:
 
-                ON_VISIT(node)
+                maybe_call(on_visit, [node])
                 visited_nodes.add(node)
                 visited_path.append(node)
                 local_debug_print(f"visited: {node}")
@@ -161,7 +182,12 @@ class Graph:
 
         return visited_path
 
-    def bft(self, from_node, debug=DEFAULT__DEBUG):
+    def bft(
+        self,
+        from_node,
+        on_visit=DEFAULT__ON_VISIT,
+        debug=DEFAULT__DEBUG,
+    ):
         """
         Print each node in breadth-first order beginning from `from_node`.
         """
@@ -174,7 +200,12 @@ class Graph:
 
         return self.xft(Queue, from_node, debug=debug)
 
-    def dft(self, from_node, debug=DEFAULT__DEBUG):
+    def dft(
+        self,
+        from_node,
+        on_visit=DEFAULT__ON_VISIT,
+        debug=DEFAULT__DEBUG,
+    ):
         """
         Print each node in depth-first order beginning from `from_node`.
         """
@@ -188,15 +219,18 @@ class Graph:
         return self.xft(Stack, from_node, debug=debug)
 
     def dft_recursive(
-        self, from_node, visited_nodes=None, visited_path=None, debug=DEFAULT__DEBUG
+        self,
+        from_node,
+        visited_nodes=None,
+        visited_path=None,
+        on_visit=DEFAULT__ON_VISIT,
+        debug=DEFAULT__DEBUG,
     ):
         """
         Print each node in depth-first order beginning from `from_node`.
 
         This should be done using recursion.
         """
-
-        ON_VISIT = print
 
         # yapf: disable
         def local_debug_print(*messages): debug_print("(Graph).dft_recursive", args=(from_node, visited_nodes, visited_path), kwargs=None, messages=messages, should_print=debug,); return # noqa
@@ -210,7 +244,7 @@ class Graph:
         if visited_path is None:
             visited_path = list()
 
-        ON_VISIT(from_node)
+        maybe_call(on_visit, [from_node])
         visited_nodes.add(from_node)
         visited_path = visited_path + [from_node]
         local_debug_print(f"visited: {from_node}")
@@ -228,7 +262,13 @@ class Graph:
 
         return visited_path
 
-    def bfs(self, from_node, to_node, debug=DEFAULT__DEBUG):
+    def bfs(
+        self,
+        from_node,
+        to_node,
+        on_visit=DEFAULT__ON_VISIT,
+        debug=DEFAULT__DEBUG,
+    ):
         """
         Return a list containing the shortest path from `from_node` to `to_node` in breath-first order.
         """
@@ -241,7 +281,13 @@ class Graph:
 
         return
 
-    def dfs(self, from_node, to_node, debug=DEFAULT__DEBUG):
+    def dfs(
+        self,
+        from_node,
+        to_node,
+        on_visit=DEFAULT__ON_VISIT,
+        debug=DEFAULT__DEBUG,
+    ):
         """
         Return a list containing a path from `from_node` to `to_node` in depth-first order.
         """
@@ -260,6 +306,7 @@ class Graph:
         to_node,
         visited_nodes=None,
         visited_path=None,
+        on_visit=DEFAULT__ON_VISIT,
         debug=DEFAULT__DEBUG
     ):
         """
@@ -267,8 +314,6 @@ class Graph:
 
         This should be done using recursion.
         """
-
-        ON_VISIT = print
 
         # yapf: disable
         def local_debug_print(*messages): debug_print("(Graph).dfs_recursive", args=(from_node, to_node, visited_nodes, visited_path), kwargs=None, messages=messages, should_print=debug,); return # noqa
@@ -282,7 +327,7 @@ class Graph:
         if visited_path is None:
             visited_path = list()
 
-        ON_VISIT(from_node)
+        maybe_call(on_visit, [from_node])
         visited_nodes.add(from_node)
         visited_path = visited_path + [from_node]
         local_debug_print(f"visited: {from_node}")
