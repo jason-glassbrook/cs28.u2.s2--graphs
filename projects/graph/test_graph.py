@@ -1,12 +1,21 @@
+############################################################
+
 import unittest
 import sys
 import io
+
 from .graph import Graph
+
+############################################################
 
 
 class Test(unittest.TestCase):
 
     def setUp(self):
+
+        self.__sys_stdout = sys.stdout
+        sys.stdout = io.StringIO()
+
         self.graph = Graph()
 
         self.graph.add_node(1)
@@ -28,7 +37,16 @@ class Test(unittest.TestCase):
         self.graph.add_edge(2, 3)
         self.graph.add_edge(4, 6)
 
+        return
+
+    def tearDown(self):
+
+        sys.stdout = self.__sys_stdout
+
+        return
+
     def test_nodes(self):
+
         nodes = {
             1: {2},
             2: {3, 4},
@@ -38,9 +56,13 @@ class Test(unittest.TestCase):
             6: {3},
             7: {1, 6},
         }
+
         self.assertDictEqual(self.graph.get_map(), nodes)
 
+        return
+
     def test_bft(self):
+
         bft = [
             "1\n2\n3\n4\n5\n6\n7\n",
             "1\n2\n3\n4\n5\n7\n6\n",
@@ -56,16 +78,16 @@ class Test(unittest.TestCase):
             "1\n2\n4\n3\n7\n5\n6\n",
         ]
 
-        stdout_ = sys.stdout
-        sys.stdout = io.StringIO()
         self.graph.bft(1)
+
         output = sys.stdout.getvalue()
 
         self.assertIn(output, bft)
 
-        sys.stdout = stdout_    # Restore stdout
+        return
 
     def test_dft(self):
+
         dft = [
             "1\n2\n3\n5\n4\n6\n7\n",
             "1\n2\n3\n5\n4\n7\n6\n",
@@ -73,16 +95,16 @@ class Test(unittest.TestCase):
             "1\n2\n4\n6\n3\n5\n7\n",
         ]
 
-        stdout_ = sys.stdout
-        sys.stdout = io.StringIO()
         self.graph.dft(1)
+
         output = sys.stdout.getvalue()
 
         self.assertIn(output, dft)
 
-        sys.stdout = stdout_    # Restore stdout
+        return
 
     def test_dft_recursive(self):
+
         dft = [
             "1\n2\n3\n5\n4\n6\n7\n",
             "1\n2\n3\n5\n4\n7\n6\n",
@@ -90,26 +112,34 @@ class Test(unittest.TestCase):
             "1\n2\n4\n6\n3\n5\n7\n",
         ]
 
-        stdout_ = sys.stdout
-        sys.stdout = io.StringIO()
         self.graph.dft_recursive(1)
+
         output = sys.stdout.getvalue()
 
         self.assertIn(output, dft)
 
-        sys.stdout = stdout_    # Restore stdout
+        return
 
     def test_bfs(self):
+
         bfs = [1, 2, 4, 6]
         self.assertListEqual(self.graph.bfs(1, 6), bfs)
 
+        return
+
     def test_dfs(self):
+
         dfs = [[1, 2, 4, 6], [1, 2, 4, 7, 6]]
         self.assertIn(self.graph.dfs(1, 6), dfs)
 
+        return
+
     def test_dfs_recursive(self):
+
         dfs = [[1, 2, 4, 6], [1, 2, 4, 7, 6]]
         self.assertIn(self.graph.dfs_recursive(1, 6), dfs)
+
+        return
 
 
 if __name__ == "__main__":

@@ -1,5 +1,12 @@
+############################################################
+
 import unittest
+import sys
+import io
+
 from .ancestor import earliest_ancestor
+
+############################################################
 
 
 class Test(unittest.TestCase):
@@ -13,7 +20,21 @@ class Test(unittest.TestCase):
         6   7   9
     """
 
+    def setUp(self):
+
+        self.__sys_stdout = sys.stdout
+        sys.stdout = io.StringIO()
+
+        return
+
+    def tearDown(self):
+
+        sys.stdout = self.__sys_stdout
+
+        return
+
     def test_earliest_ancestor(self):
+
         test_ancestors = [
             (1, 3),
             (2, 3),
@@ -26,6 +47,7 @@ class Test(unittest.TestCase):
             (11, 8),
             (10, 1),
         ]
+
         self.assertEqual(earliest_ancestor(test_ancestors, 1), 10)
         self.assertEqual(earliest_ancestor(test_ancestors, 2), -1)
         self.assertEqual(earliest_ancestor(test_ancestors, 3), 10)
@@ -37,6 +59,8 @@ class Test(unittest.TestCase):
         self.assertEqual(earliest_ancestor(test_ancestors, 9), 4)
         self.assertEqual(earliest_ancestor(test_ancestors, 10), -1)
         self.assertEqual(earliest_ancestor(test_ancestors, 11), -1)
+
+        return
 
 
 if __name__ == "__main__":
