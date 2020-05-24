@@ -139,7 +139,7 @@ class Graph:
         debug=DEFAULT__DEBUG,
     ):
         """
-        Print each node in customizable order beginning from `from_node`.
+        Find each node in the graph from `from_node` in customizable order.
         """
 
         # yapf: disable
@@ -153,7 +153,6 @@ class Graph:
         visited_path = list()
 
         nodes_to_visit.push(from_node)
-
         local_debug_print(f"pushed: {from_node}")
 
         while len(nodes_to_visit) > 0:
