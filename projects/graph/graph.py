@@ -27,7 +27,7 @@ class Graph:
     def __init__(self, nodes=None, debug=DEFAULT__DEBUG):
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("Graph.__init__", args=(nodes,), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("Graph.__init__", args=(nodes,), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -43,7 +43,7 @@ class Graph:
     def get_map(self, debug=DEFAULT__DEBUG):
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).get_map", args=None, kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).get_map", args=None, kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -53,7 +53,7 @@ class Graph:
     def get_nodes(self, debug=DEFAULT__DEBUG):
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).get_nodes", args=None, kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).get_nodes", args=None, kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -63,7 +63,7 @@ class Graph:
     def get_edges(self, debug=DEFAULT__DEBUG):
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).get_edges", args=None, kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).get_edges", args=None, kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -78,7 +78,7 @@ class Graph:
         """
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).add_node", args=(node,), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).add_node", args=(node,), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -95,7 +95,7 @@ class Graph:
         """
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).add_edge", args=(from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).add_edge", args=(from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -110,7 +110,7 @@ class Graph:
         """
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).get_neighbors", args=(node,), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).get_neighbors", args=(node,), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -125,7 +125,7 @@ class Graph:
         ON_VISIT = print
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).xft", args=(PusherPopper, from_node,), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).xft", args=(PusherPopper, from_node,), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -167,7 +167,7 @@ class Graph:
         """
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).bft", args=(from_node,), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).bft", args=(from_node,), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -180,7 +180,7 @@ class Graph:
         """
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).dft", args=(from_node,), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).dft", args=(from_node,), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -199,7 +199,7 @@ class Graph:
         ON_VISIT = print
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).dft_recursive", args=(from_node, visited_nodes, visited_path), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).dft_recursive", args=(from_node, visited_nodes, visited_path), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -234,7 +234,7 @@ class Graph:
         """
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).bfs", args=(from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).bfs", args=(from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -247,7 +247,7 @@ class Graph:
         """
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).dfs", args=(from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).dfs", args=(from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
@@ -271,7 +271,7 @@ class Graph:
         ON_VISIT = print
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).dfs_recursive", args=(from_node, to_node, visited_nodes, visited_path), kwargs=None, messages=messages, should_print=debug,); return
+        def local_debug_print(*messages): debug_print("(Graph).dfs_recursive", args=(from_node, to_node, visited_nodes, visited_path), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
