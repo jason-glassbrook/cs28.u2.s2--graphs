@@ -339,7 +339,7 @@ class Graph:
 
         local_debug_print()
 
-        return
+        return self.xfs(Queue, from_node, to_node, on_visit=on_visit, debug=debug)
 
     def dfs(
         self,
@@ -358,7 +358,7 @@ class Graph:
 
         local_debug_print()
 
-        return
+        return self.xfs(Stack, from_node, to_node, on_visit=on_visit, debug=debug)
 
     def dfs_recursive(
         self,
