@@ -255,6 +255,73 @@ class Graph:
 
         return traversed_nodes
 
+    def xfs(
+        self,
+        PusherPopper,
+        from_node,
+        to_node,
+        on_visit=DEFAULT__ON_VISIT,
+        debug=DEFAULT__DEBUG,
+    ):
+        """
+        Find a path in the graph from `from_node` to `to_node` in customizable order.
+        """
+
+        # yapf: disable
+        def local_debug_print(*messages): debug_print("(Graph).xfs", args=(PusherPopper, from_node, to_node,), kwargs=None, messages=messages, should_print=debug,); return # noqa
+        # yapf: enable
+
+        local_debug_print()
+
+        paths_to_visit = PusherPopper()
+        visited_nodes = set()
+        searched_path = None
+
+        if from_node == to_node:
+
+            searched_path = [to_node]
+            local_debug_print(f"found a path: {searched_path}")
+
+        else:
+
+            # unlike xft, this holds paths
+            paths_to_visit.push([from_node])
+            local_debug_print(f"pushed: {[from_node]}")
+
+        while len(paths_to_visit) > 0 and searched_path is None:
+
+            path = paths_to_visit.pop()
+            local_debug_print(f"popped: {path}")
+
+            node = path[-1]
+            local_debug_print(f"latest node: {node}")
+
+            if node not in visited_nodes:
+
+                maybe_call(on_visit, [node])
+                visited_nodes.add(node)
+                local_debug_print(f"visited: {node}")
+
+                for neighbor in self.get_neighbors(node):
+
+                    neighbor_path = list(path)
+                    neighbor_path.append(neighbor)
+
+                    if neighbor == to_node:
+
+                        searched_path = neighbor_path
+                        local_debug_print(f"found a path: {searched_path}")
+                        break
+
+                    paths_to_visit.push(neighbor_path)
+                    local_debug_print(f"pushed: {neighbor_path}")
+
+            else:
+
+                local_debug_print(f"already visited: {node}")
+
+        return searched_path
+
     def bfs(
         self,
         from_node,
