@@ -150,7 +150,7 @@ class Graph:
 
         nodes_to_visit = PusherPopper()
         visited_nodes = set()
-        visited_path = list()
+        traversed_nodes = list()
 
         nodes_to_visit.push(from_node)
         local_debug_print(f"pushed: {from_node}")
@@ -164,7 +164,7 @@ class Graph:
 
                 maybe_call(on_visit, [node])
                 visited_nodes.add(node)
-                visited_path.append(node)
+                traversed_nodes.append(node)
                 local_debug_print(f"visited: {node}")
 
                 for neighbor in self.get_neighbors(node):
@@ -176,7 +176,7 @@ class Graph:
 
                 local_debug_print(f"already visited: {node}")
 
-        return visited_path
+        return traversed_nodes
 
     def bft(
         self,
@@ -218,7 +218,7 @@ class Graph:
         self,
         from_node,
         visited_nodes=None,
-        visited_path=None,
+        traversed_nodes=None,
         on_visit=DEFAULT__ON_VISIT,
         debug=DEFAULT__DEBUG,
     ):
@@ -229,31 +229,31 @@ class Graph:
         """
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).dft_recursive", args=(from_node, visited_nodes, visited_path), kwargs=None, messages=messages, should_print=debug,); return # noqa
+        def local_debug_print(*messages): debug_print("(Graph).dft_recursive", args=(from_node, visited_nodes, traversed_nodes), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
 
         visited_nodes = visited_nodes or set()
-        visited_path = visited_path or list()
+        traversed_nodes = traversed_nodes or list()
 
         maybe_call(on_visit, [from_node])
         visited_nodes.add(from_node)
-        visited_path = visited_path + [from_node]
+        traversed_nodes = traversed_nodes + [from_node]
         local_debug_print(f"visited: {from_node}")
 
         for neighbor in self.get_neighbors(from_node):
 
             if neighbor not in visited_nodes:
 
-                visited_path = self.dft_recursive(
+                traversed_nodes = self.dft_recursive(
                     neighbor,
                     visited_nodes,
-                    visited_path,
+                    traversed_nodes,
                     debug=debug,
                 )
 
-        return visited_path
+        return traversed_nodes
 
     def bfs(
         self,
