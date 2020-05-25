@@ -11,6 +11,8 @@ from .graph import Graph
 
 class Test(unittest.TestCase):
 
+    debug = False
+
     def setUp(self):
 
         self.__sys_stdout = sys.stdout
@@ -78,11 +80,11 @@ class Test(unittest.TestCase):
             "1\n2\n4\n3\n7\n5\n6\n",
         ]
 
-        self.graph.bft(1)
+        self.graph.bft(1, debug=self.debug)
 
-        output = sys.stdout.getvalue()
+        result = sys.stdout.getvalue()
 
-        self.assertIn(output, bft)
+        self.assertIn(result, bft)
 
         return
 
@@ -95,11 +97,11 @@ class Test(unittest.TestCase):
             "1\n2\n4\n6\n3\n5\n7\n",
         ]
 
-        self.graph.dft(1)
+        self.graph.dft(1, debug=self.debug)
 
-        output = sys.stdout.getvalue()
+        result = sys.stdout.getvalue()
 
-        self.assertIn(output, dft)
+        self.assertIn(result, dft)
 
         return
 
@@ -112,32 +114,41 @@ class Test(unittest.TestCase):
             "1\n2\n4\n6\n3\n5\n7\n",
         ]
 
-        self.graph.dft_recursive(1)
+        self.graph.dft_recursive(1, debug=self.debug)
 
-        output = sys.stdout.getvalue()
+        result = sys.stdout.getvalue()
 
-        self.assertIn(output, dft)
+        self.assertIn(result, dft)
 
         return
 
     def test_bfs(self):
 
         bfs = [1, 2, 4, 6]
-        self.assertListEqual(self.graph.bfs(1, 6), bfs)
+
+        result = self.graph.bfs(1, 6, debug=self.debug)
+
+        self.assertListEqual(result, bfs)
 
         return
 
     def test_dfs(self):
 
         dfs = [[1, 2, 4, 6], [1, 2, 4, 7, 6]]
-        self.assertIn(self.graph.dfs(1, 6), dfs)
+
+        result = self.graph.dfs(1, 6, debug=self.debug)
+
+        self.assertIn(result, dfs)
 
         return
 
     def test_dfs_recursive(self):
 
         dfs = [[1, 2, 4, 6], [1, 2, 4, 7, 6]]
-        self.assertIn(self.graph.dfs_recursive(1, 6), dfs)
+
+        result = self.graph.dfs_recursive(1, 6, debug=self.debug)
+
+        self.assertIn(result, dfs)
 
         return
 
