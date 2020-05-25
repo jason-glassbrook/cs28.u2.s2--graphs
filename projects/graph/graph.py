@@ -298,7 +298,7 @@ class Graph:
         from_node,
         to_node,
         visited_nodes=None,
-        visited_path=None,
+        searched_path=None,
         on_visit=DEFAULT__ON_VISIT,
         debug=DEFAULT__DEBUG
     ):
@@ -309,23 +309,23 @@ class Graph:
         """
 
         # yapf: disable
-        def local_debug_print(*messages): debug_print("(Graph).dfs_recursive", args=(from_node, to_node, visited_nodes, visited_path), kwargs=None, messages=messages, should_print=debug,); return # noqa
+        def local_debug_print(*messages): debug_print("(Graph).dfs_recursive", args=(from_node, to_node, visited_nodes, searched_path), kwargs=None, messages=messages, should_print=debug,); return # noqa
         # yapf: enable
 
         local_debug_print()
 
         visited_nodes = visited_nodes or set()
-        visited_path = visited_path or list()
+        searched_path = searched_path or list()
 
         maybe_call(on_visit, [from_node])
         visited_nodes.add(from_node)
-        visited_path = visited_path + [from_node]
+        searched_path = searched_path + [from_node]
         local_debug_print(f"visited: {from_node}")
 
         if from_node == to_node:
 
             local_debug_print(f"found: {to_node}")
-            return visited_path
+            return searched_path
 
         else:
 
@@ -337,7 +337,7 @@ class Graph:
                         neighbor,
                         to_node,
                         visited_nodes,
-                        visited_path,
+                        searched_path,
                         debug=debug,
                     )
 
