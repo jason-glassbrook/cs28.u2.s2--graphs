@@ -6,8 +6,10 @@ from projects.graph.graph import Graph
 
 ############################################################
 
+DEFAULT__DEBUG = False
 
-def earliest_ancestor(ancestor_edges, from_node):
+
+def earliest_ancestor(ancestor_edges, from_node, debug=DEFAULT__DEBUG):
 
     # Define `ancestors` graph from `ancestor_edges`...
     ancestors = Graph()
@@ -20,8 +22,10 @@ def earliest_ancestor(ancestor_edges, from_node):
     # Define edges:
     for parent, child in ancestor_edges:
         # child -> parent
-        ancestors.add_edge(parent, child)
+        ancestors.add_edge(child, parent)
 
-    print(ancestors.get_map())
+    if debug:
+        print("--- ancestors ---")
+        print(ancestors.get_map())
 
     return
