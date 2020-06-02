@@ -4,9 +4,9 @@
 
 ## Objectives
 
-* Learn what graphs are
-* Learn the components of graphs
-* Learn what graphs are useful for
+*   Learn what graphs are
+*   Learn the components of graphs
+*   Learn what graphs are useful for
 
 ## What Are Graphs?
 
@@ -15,7 +15,6 @@ Graphs are collections of related data. They're like trees, except connections c
 The nodes in a graph are called _vertexes_ (or _vertices_ or _verts_), and the connections between the verts are called _edges_.
 
 And edge denotes a relationship or linkage between the two verts.
-
 
 ## What can they represent?
 
@@ -101,7 +100,7 @@ no way to go back and form a repeating loop in the git commit hierarchy.
 
 Draw examples of the following:
 
-* Undirected graph of 4 verts.
-* Directed graph of 5 verts.
-* Cyclic directed graph of 6 verts.
-* DAG of 7 verts.
+*   Undirected graph of 4 verts.
+*   Directed graph of 5 verts.
+*   Cyclic directed graph of 6 verts.
+*   DAG of 7 verts.
